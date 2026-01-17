@@ -3,7 +3,7 @@ app_output_dir = output/app
 drv_output_dir = output/driver
 cli_output_dir = output/driver/cli
 
-objects = $(app_output_dir)/main.o $(drv_output_dir)/driver.o $(cli_output_dir)/cli.o
+objects = $(app_output_dir)/main.o $(app_output_dir)/logger.o $(drv_output_dir)/driver.o $(cli_output_dir)/cli.o
 
 executable = demo_app
 
