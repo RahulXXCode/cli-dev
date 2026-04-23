@@ -69,13 +69,11 @@ static void* log_thread_exec(void *arg)
         	log.line_no,
         	log.info_pr);
 
-                //printf("MOD:[%s], TRACE_LVL:[%d], fn:%s : %d  %s \n", app_mod_lvl_grp[log.log_lvl],\
-			    log.log_code, log.fn_name, log.line_no, log.info_pr);
-		//printf("%d:%d>> ", count, subcount);
 		fflush(stdout);
 		pthread_mutex_unlock(&console_lock);
 	    }
 	}
+	return 0;
 }
 
 void app_log(log_module_lvl_t lvl, const uint8_t code,const char* func, int line, char* fmt, ...)

@@ -9,8 +9,8 @@
 #define APP_LOG(mod_lvl, err_code,f, ...) \
     app_log(mod_lvl, err_code, __FUNCTION__, __LINE__, f, ##__VA_ARGS__)
 
-#define MAX_LOG_INFO_TXT_SIZE 256
-#define MAX_API_TXT_SIZE 128
+#define MAX_LOG_INFO_TXT_SIZE   256U
+#define MAX_API_TXT_SIZE        128U
 
 typedef enum {
     APP_MOD_CLI_TYPE,

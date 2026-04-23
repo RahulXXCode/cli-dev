@@ -27,6 +27,8 @@ static app_ret_t module_main_parse(int argc, char *argv[])
     char *str;
     app_ret_t ret = APP_SUCCESS;
     uint8_t i = 1;
+    module.log.log_lvl = APP_LOG_NONE;
+
     if (argv[1] == NULL)
     {
 	ret = APP_INVALID;
@@ -43,6 +45,11 @@ static app_ret_t module_main_parse(int argc, char *argv[])
         if (strcmp(str, INIT_DEBLOG_ARG) == 0)
         {
 	    str = argv[i + 1];
+	    if (str == NULL)
+	    {
+		ret = APP_INVALID;
+		break;
+	    }
 	    if (strcmp(str, app_mod_lvl_grp[0]) == 0)
 	    {
 		module.log.log_lvl = APP_LOG_DRV; 
@@ -65,7 +72,6 @@ static app_ret_t module_main_parse(int argc, char *argv[])
 	    {
 		// report error
 		printf("\n Argument type is invalid!");
-		module.log.log_lvl = APP_LOG_NONE; 
 		ret = APP_INVALID;
 		break;
 	    }
@@ -75,7 +81,6 @@ static app_ret_t module_main_parse(int argc, char *argv[])
 	    // report non valid args and continue to boot the app
 	    printf("\n Argument type is invalid!");
 	    ret = APP_INVALID;
-            module.log.log_lvl = APP_LOG_NONE; 
 	    break;
         }
 	i++;
@@ -133,6 +138,7 @@ void* cli_exec_thread(void* arg)
 	    count++;
 	}
     }
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
@@ -142,6 +148,7 @@ int main(int argc, char *argv[]) {
     // initialize the cli module where in this module sample driver is mapped
     // just for understanding purpose
     setbuf(stdout, NULL);
+
     if (argc > 0)
     {
 	ret = module_main_parse(argc, argv);
@@ -153,6 +160,7 @@ int main(int argc, char *argv[]) {
 	{
 	    printf("logger not activated!\n");
 	}
+
     }
     if (ret == APP_ERROR)
     {
